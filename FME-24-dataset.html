@@ -44,6 +44,24 @@
             </div>
         </div>
 
+        <!-- FME per sample per participant annotation -->
+        <div class="download-section">
+            <h2>fme-per-sample-per-participant-annotation.csv</h2>
+            <a href="fme-per-sample-per-participant-annotation.csv" download="fme-per-sample-per-participant-annotation.csv" class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                CSV of annotations per sample per participant - e.g. 1 row shows the time-stamped and arousal-valence annotation per sample by 1 participant.
+            </p>
+            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-per-sample', this)">More Details</button>
+            <div id="more-info-per-sample" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    CSV is shown column headers: 'participant_id	sample_id	emotion_sentence	all_timestamps	all_valence_values	all_arousal_values	emotion_sentence_clean	familiarity_rating	film	composer	song_name	year	soundtrack	director	genre	ISRC'
+
+                </p>
+            </div>
+        </div>
+
         <!-- FME-dataset-metadata CSV -->
         <div class="download-section">
             <h2>469-audio-samples-fme-24-metadata.csv</h2>
