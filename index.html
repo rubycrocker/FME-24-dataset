@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FME-24 Dataset</title>
+    <title>Simple Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,180 +13,14 @@
         <a href="interactivegraph.html">Interactive Graph</a>
         <a href="publications.html">Publications</a>
         <a href="survey-results.html">Tabes Explained</a>
-        <a href="av_trajectory.html" class="active">AV Trajectories</a>
 
     </div>
 
     <div id="content">
-        <h1>FME-24 Dataset</h1>
-        <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
+        <h1>HOME</h1>
+        <p> Please click on 'FME-24 Dataset' tab for the csv files </p>
+        <p> Please click on 'Interactive Graph' tab to explore the arousal/valence space </p>
 
-        <!-- FME-24 Annotations CSV -->
-        <div class="download-section">
-            <h2>annotations_with_path_matches.csv</h2>
-            <a href="annotations_with_path_matches.csv" download="annotations_with_path_matches.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV of emotion annotations, timings, valence/arousal changes, ISRC number and film/music metadata - row K matches the audio file path names.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('path-matches', this)">More Details</button>
-            <div id="path-matches" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    CSV with fuzzy matching audio file names to the song titles. Each row corresponds to a unique combination of participant and song sample. 
-                    Because of this, there may be multiple arousal/valence coordinates and timestamps stored within a single row.
-                    You’ll find that column K contains the matched filenames corresponding to the actual audio files.
-                </p>
-            </div>
-        </div>
-
-
-
-        <!-- FME-24 Annotations CSV -->
-        <div class="download-section">
-            <h2>FME-24-Annotations.csv</h2>
-            <a href="FME-24-Annotations.csv" download="FME-24_Annotations.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV of emotion annotations, timings, valence/arousal changes, ISRC number and film/music metadata.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-annotations', this)">More Details</button>
-            <div id="more-info-annotations" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This file contains FME-24 dataset. Each row is an individual annotation - one click where one participant felt a change in emotion.
-                    The csv file contains the Start and End times of the segments where participants clicked the button 
-                    - where they felt a change in emotion. It contains the Valence and Arousal values participants 
-                    plotted in the valence-arousal graph, these valence and arousal numbers correspond to the 
-                    segment time in the row, these are labelled 'After Arousal' and 'After Valence'. 'Before Arousal'
-                    and 'Before Valence' show the emotion time points before the change was clicked. It contains
-                    the amount of change before and after a time point - how much they differ. It contains the 
-                    emotion sentence that supports the annotations done by that specific participant. It contains 
-                    a familiarity rating, the participant ID and metadata from the film and music.
-                </p>
-            </div>
-        </div>
-
-        <!-- FME per sample per participant annotation -->
-        <div class="download-section">
-            <h2>fme-per-sample-per-participant-annotation.csv</h2>
-            <a href="fme-per-sample-per-participant-annotation.csv" download="fme-per-sample-per-participant-annotation.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                This CSV file layout is 662 X 16. Where the 662 rows are each loaded sample annotated by 1 participant. e.g. 'song1-sample1' annotated by participantX.
-                 CSV of annotations per sample per participant - e.g. 1 row shows the time-stamped and arousal-valence annotation per sample by 1 participant.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-per-sample', this)">More Details</button>
-            <div id="more-info-per-sample" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    CSV is shown column headers: 'participant_id	sample_id	emotion_sentence	all_timestamps	all_valence_values	all_arousal_values	emotion_sentence_clean	familiarity_rating	film	composer	song_name	year	soundtrack	director	genre	ISRC'
-
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-dataset-metadata CSV -->
-        <div class="download-section">
-            <h2>469-audio-samples-fme-24-metadata.csv</h2>
-            <a href="469-audio-samples-fme-24-metadata.csv" download="469-audio-samples-fme-24-metadata.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of 469 audio samples that were in the cleaned version of the data and the metadata corresponding to these.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-469', this)">More Details</button>
-            <div id="more-info-469" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV contains the 469 audio samples after cleaning from the original 600 with ISRC numbers and metadata, for looking at the specific cleaned version that's in the '1680' sample versions.
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-dataset-chord extraction-CSV -->
-        <div class="download-section">
-            <h2>FME-chord-extraction-before-after.csv</h2>
-            <a href="chord-extraction-fme-24.csv" download="chord-extraction-fme-24.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of the before and after chord extraction of the timestamps in the data.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-chord', this)">More Details</button>
-            <div id="more-info-chord" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV shows chord extraction using Chordino, to extract the dominant chords in the before and after sections of where participants annotated a change of emotion. The 'before' chord shows the chords present before the change and the 'after' chords show the chords after - so the AV values corresponding to the chord value is the 'after' section.
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-dataset-librosa-feature-extraction CSV -->
-        <div class="download-section">
-            <h2>FME_24-Dataset-Librosa-Feature-Extraction.csv</h2>
-            <a href="FME_24-Dataset-Librosa-Feature-Extraction.csv" download="FME_24-Dataset-Librosa-Feature-Extraction.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of librosa features extracted from before and after timestamps of the emotion annotation in the data.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-librosa', this)">More Details</button>
-            <div id="more-info-librosa" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV features extracted from the audio files using the librosa library. The features include: MFCC_1_Mean	MFCC_2_Mean	MFCC_3_Mean	MFCC_4_Mean	MFCC_5_Mean	MFCC_6_Mean	MFCC_7_Mean	MFCC_8_Mean	MFCC_9_Mean	MFCC_10_Mean	MFCC_11_Mean	MFCC_12_Mean	MFCC_13_Mean	MFCC_1_Var	MFCC_2_Var	MFCC_3_Var	MFCC_4_Var	MFCC_5_Var	MFCC_6_Var	MFCC_7_Var	MFCC_8_Var	MFCC_9_Var	MFCC_10_Var	MFCC_11_Var	MFCC_12_Var	MFCC_13_Var	Spectral_Centroid	Spectral_Bandwidth	Spectral_Contrast	Spectral_Rolloff	Zero_Crossing_Rate	Chroma_1	Chroma_2	Chroma_3	Chroma_4	Chroma_5	Chroma_6	Chroma_7	Chroma_8	Chroma_9	Chroma_10	Chroma_11	Chroma_12'
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-dataset-metadata CSV -->
-        <div class="download-section">
-            <h2>FME-dataset-metadata.csv</h2>
-            <a href="film-emotion-music-dataset-metadata.csv" download="film-emotion-music-dataset-metadata" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of the metadata of the audio files in the dataset. This csv shows data on each individual audio file including the length, ISRC number, and sample timestamps.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-metadata', this)">More Details</button>
-            <div id="more-info-metadata" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV shows metadata for each individual audio file including duration, ISRC (unique identifier), and timestamps for selected samples. Useful for locating and verifying the original track versions used.
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-matched-participants CSV -->
-        <div class="download-section">
-            <h2>fme-93-matched_participants.csv</h2>
-            <a href="fme-93-matched_participants.csv" download="fme-93-matched_participants.csv" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of 93 participants responses from the 185.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-matched', this)">More Details</button>
-            <div id="more-info-matched" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV includes the 93 matched participant data from the orignal 185 participant, this is without errors from the 185 participant data.
-                </p>
-            </div>
-        </div>
-
-        <!-- FME-Survey-Results CSV -->
-        <div class="download-section">
-            <h2>FME-Survey-Details.csv</h2>
-            <a href="FME-Survey-Details.csv" download="FME-Survey-Details" class="download-btn">
-                <button>Download CSV</button>
-            </a>
-            <p class="download-description">
-                CSV file of the uncleaned survey results. This CSV file contains demographics of participants, all anonymized, including blank fields where participants couldn't fill out sections.
-            </p>
-            <button class="toggle-btn" onclick="toggleMoreInfo('more-info-survey', this)">More Details</button>
-            <div id="more-info-survey" style="display: none; margin-top: 1em;">
-                <p class="download-description">
-                    This CSV contains full participant data including dropouts, blank fields, and optional demographic info (age, gender, musical background). This CSV shows the results per participant along with information where data couldn't be found or participants left blank/left the survey early.
-                </p>
-            </div>
-        </div>
     </div>
 
     <script src="script.js"></script>
