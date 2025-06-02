@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar">
+        <a href="index.html" class="active">Home</a>
+        <a href="FME-24-dataset.html">FME-24 Dataset</a>
+        <a href="interactivegraph.html">Interactive Graph</a>
+        <a href="publications.html">Publications</a>
+        <a href="survey-results.html">Tables Explained</a>
+        <a href="av_trajectory.html" class="active">AV Trajectories</a>
+
+    </div>
+
+    <div id="content">
+        <h1>Survey Results</h1>
+
+        <div class="download-section">
+            <h2>FME-Survey-Details.csv</h2>
+            <a href="FME-Survey-Details.csv" download="FME-Survey-Details" class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                CSV file containing anonymized survey results and demographic information.
+            </p>
+        </div>
+
+        <!-- Static Table (2 rows, 30 columns) -->
+        <div class="download-section">
+            <h2>Preview of Survey Results Table</h2>
+            <table class="survey-table" id="survey-table">
+                <tr>
+                    <th class="col-0">A</th>
+                    <th class="col-1">B</th>
+                    <!-- 29 more headers -->
+                    <th class="col-2">C-H</th>
+                    <th class="col-3">I</th>
+                    <th class="col-4">J</th>
+                    <th class="col-5">K</th>
+                    <th class="col-6">L</th>
+                    <th class="col-7">M</th>
+                    <th class="col-8">N-BO</th>
+                    <th class="col-9">BP</th>
+                    <th class="col-10">BQ</th>
+                    <th class="col-11">BR</th>
+                    <th class="col-12">BS</th>
+                    <th class="col-13">BT</th>
+                    <th class="col-14">BU</th>
+                    <th class="col-15">BV</th>
+                    <th class="col-16">BW</th>
+                    <th class="col-17">BX</th>
+                    <th class="col-18">BY</th>
+                    <th class="col-19">BZ</th>
+                    <th class="col-20">CA</th>
+                    <th class="col-21">CB</th>
+                    <th class="col-22">CC</th>
+                    <th class="col-23">CD</th>
+                    <th class="col-24">CE</th>
+                    <th class="col-25">CF</th>
+                    <th class="col-26">CG</th>
+                    <th class="col-27">CH</th>
+                    <th class="col-28">CI</th>
+                    <th class="col-29">CJ</th>
+                </tr>
+                <tr>
+                    <td class="col-0">_qrc...</td>
+                    <td class="col-1">2024-01-30</td>
+                    <td class="col-2">SONG 1 info</td>
+                    <td class="col-3">25-34</td>
+                    <td class="col-4">Mexico</td>
+                    <td class="col-5">Female</td>
+                    <td class="col-6">Mexican</td>
+                    <td class="col-7">part-time...</td>
+                    <td class="col-8">SONG 2-10 info</td>
+                    <td class="col-9">2-4 hrs</td>
+                    <td class="col-10">1-2hrs</td>
+                    <td class="col-11">0-1</td>
+                    <td class="col-12">sort-of-agree</td>
+                    <td class="col-13">not-sure</td>
+                    <td class="col-14">not-sure</td>
+                    <td class="col-15">sort-of-agree</td>
+                    <td class="col-16">sort-of-agree</td>
+                    <td class="col-17">mostly-agree</td>
+                    <td class="col-18">mostly-agree</td>
+                    <td class="col-19">9</td>
+                    <td class="col-20">sort-of-agree</td>
+                    <td class="col-21">sort-of-agree</td>
+                    <td class="col-22">sort-of-agree</td>
+                    <td class="col-23">mostly-agree</td>
+                    <td class="col-24">Pop</td>
+                    <td class="col-25">mostly-agree</td>
+                    <td class="col-26">strongly-disagree</td>
+                    <td class="col-27">strongly-agree</td>
+                    <td class="col-28">mostly-agree</td>
+                    <td class="col-29">sort-of-agree</td>
+
+                </tr>
+            </table>
+            
+            <!-- Tooltip area below the table -->
+            <div id="column-tooltip" class="column-tooltip"></div>                        
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

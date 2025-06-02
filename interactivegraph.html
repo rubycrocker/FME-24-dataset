@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Graph</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar">
+        <a href="index.html" class="active">Home</a>
+        <a href="FME-24-dataset.html">FME-24 Dataset</a>
+        <a href="interactivegraph.html">Interactive Graph</a>
+        <a href="publications.html">Publications</a>
+        <a href="survey-results.html">Tabes Explained</a>
+        <a href="av_trajectory.html" class="active">AV Trajectories</a>
+    </div>
+
+    <div id="content">
+        <h1>Interactive Graph</h1>
+        <button class="download-btn" id="resetButton">Reset</button>
+        <button class="toggle-btn" id="annotationToggle">Toggle Annotations</button>
+        <button class="toggle-btn" id="adjectiveToggle">Toggle Adjectives</button>
+
+        <div id="graph-container">
+            <canvas id="graphCanvas" width="600" height="600"></canvas>
+            <div id="results-container">
+                <h3>Coordinates</h3>
+                <div id="results"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

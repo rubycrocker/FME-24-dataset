@@ -1,0 +1,161 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar styling */
+#sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    position: fixed;
+    height: 100vh;
+    padding: 30px 20px;
+}
+
+#sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+}
+
+#sidebar a:hover {
+    background-color: #34495e;
+    padding-left: 20px;
+}
+
+#sidebar a.active {
+    background-color: #1abc9c;
+    padding-left: 20px;
+}
+
+/* Content area styling */
+#content {
+    margin-left: 270px;
+    padding: 40px 30px;
+    width: calc(100% - 270px);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Graph layout */
+#graph-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+canvas {
+    border: 1px solid #000;
+}
+
+/* Results box */
+#results-container {
+    width: 250px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#results-container h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#results {
+    font-size: 14px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* Reset button */
+#resetButton {
+    margin-top: 20px;
+    background-color: #1abc9c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+#resetButton:hover {
+    background-color: #34495e;
+}
+
+.download-btn button, #resetButton {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+#download-btn button:hover {
+    background-color: #34495e;
+}
+
+.toggle-btn {
+    background-color: #ccc;               /* Light grey */
+    color: #333;                          /* Dark text */
+    border: none;
+    padding: 5px 15px;                   /* Same as green buttons */
+    font-size: 12px;                      /* Same size */
+    font-weight: bold;                   /* Same weight */
+    cursor: pointer;
+    border-radius: 5px;                   /* Same rounded edges */
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.toggle-btn:hover {
+    background-color: #999;               /* Darker grey on hover */
+}
+
+.toggle-btn + .toggle-btn {
+    margin-left: 10px;
+}
