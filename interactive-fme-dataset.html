@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive FME Dataset</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar (same as your other pages) -->
+  <div id="sidebar">
+    <a href="index.html">Home</a>
+    <a href="FME-24-dataset.html">FME-24 Dataset</a>
+    <a href="interactivegraph.html">Interactive Graph</a>
+    <a href="interactive-fme-dataset.html" class="active">Interactive FME Dataset</a>
+    <a href="publications.html">Publications</a>
+    <a href="survey-results.html">Tabes Explained</a>
+  </div>
+
+<!-- Main content -->
+<div id="content">
+    <h1>Interactive Arousal–Valence Plot</h1>
+    <p>Select a sample from the dropdown below to explore participant trajectories.</p>
+  
+    <select id="sample-dropdown" style="width: 100%; padding: 8px; font-size: 1rem; margin-bottom: 20px;">
+      <option value="" disabled selected>Select a sample</option>
+    </select>
+  
+    <div id="graph" style="height: 600px;"></div>
+</div>
+  
+  
+<script>
+    let fullData = {};
+  
+    async function fetchData() {
+      try {
+        const res = await fetch('plot_data2.json');
+        fullData = await res.json();
+  
+        const dropdown = document.getElementById('sample-dropdown');
+  
+        // Populate dropdown options with pathname keys
+        Object.keys(fullData).forEach(sampleName => {
+          const option = document.createElement('option');
+          option.value = sampleName;
+          option.textContent = sampleName;
+          dropdown.appendChild(option);
+        });
+  
+        // When user selects a sample, plot its data
+        dropdown.addEventListener('change', (event) => {
+          const selectedSample = event.target.value;
+          plotSample(selectedSample);
+        });
+  
+        // Auto-select first sample if available
+        const firstSample = Object.keys(fullData)[0];
+        if (firstSample) {
+          dropdown.value = firstSample;
+          plotSample(firstSample);
+        }
+  
+      } catch (e) {
+        console.error('Could not load graph:', e);
+        document.getElementById('graph').innerText = 'Error loading the graph.';
+      }
+    }
+  
+    function plotSample(sampleName) {
+      const data = fullData[sampleName];
+  
+      const layout = {
+        title: sampleName + ' - Arousal–Valence',
+        xaxis: { title: 'Valence', range: [-1, 1], zeroline: true },
+        yaxis: { title: 'Arousal', range: [-1, 1], zeroline: true },
+        hovermode: 'closest',
+        showlegend: true
+      };
+  
+      Plotly.newPlot('graph', data, layout);
+    }
+  
+    fetchData();
+  </script>
+  
+  
