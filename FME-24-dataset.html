@@ -21,7 +21,26 @@
     <div id="content">
         <h1>FME-24 Dataset</h1>
         <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
-
+        <p>The first CSV listed here at the top of the page is the best for individual marker annotations, (one arousal/valence coordinate per row) it doesn't include feature extraction.</p>
+        <p>The second CSV here is a different format structure of the page data, each row is per song sample per particpant (so it contains multiple emotion annotations)</p>
+        <h2> ORIGINAL: </h2>
+        <!-- FME-24 Annotations CSV -->
+        <div class="download-section">
+            <h2>fme_emotion_with_correct_path_matches.csv</h2>
+            <a href="fme_emotion_with_correct_path_matches.csv" download="fme_emotion_with_correct_path_matches.csv" class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                The first CSV listed here at the top of the page is the best for individual marker annotations, (one arousal/valence coordinate per row) it doesn't include feature extraction.
+            </p>
+            <button class="toggle-btn" onclick="toggleMoreInfo('path-matches', this)">More Details</button>
+            <div id="path-matches" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    With this CSV sub-emotion sentences have been created to correspond to emotion tags per marker.
+                </p>
+            </div>
+        </div>
+        
         <!-- FME-24 Annotations CSV -->
         <div class="download-section">
             <h2>annotations_with_path_matches.csv</h2>
@@ -42,7 +61,7 @@
         </div>
 
 
-
+        <h2> OLD: </h2>
         <!-- FME-24 Annotations CSV -->
         <div class="download-section">
             <h2>FME-24-Annotations.csv</h2>
