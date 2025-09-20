@@ -187,3 +187,32 @@ canvas {
 .toggle-btn + .toggle-btn {
     margin-left: 10px;
 }
+
+/* Highlight latest update */
+.download-section.latest-update {
+    border: 3px solid #1abc9c;        /* Green border to stand out */
+    background-color: #e0f7f2;        /* Light green background */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.download-section.latest-update h2 {
+    color: #0f8f75;                   /* Dark green title */
+}
+
+/* Older versions styling */
+.download-section:not(.latest-update) {
+    border: 2px dashed #ccc;          /* Dashed grey border */
+    background-color: #f9f9f9;        /* Slightly grey background */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    opacity: 0.8;                     /* Slightly faded */
+}
+
+.download-section:not(.latest-update) h2 {
+    color: #777;                       /* Muted text color */
+    font-style: italic;
+}
+
