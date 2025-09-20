@@ -23,6 +23,41 @@
         <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
         <p>The first CSV listed here at the top of the page is the best for individual marker annotations, (one arousal/valence coordinate per row) it doesn't include feature extraction.</p>
         <p>The second CSV here is a different format structure of the page data, each row is per song sample per particpant (so it contains multiple emotion annotations)</p>
+        <h2> SEPT 2025 update: </h2>
+                <!-- FME-24 Annotations CSV -->
+                <div class="download-section">
+                    <h2>fme-24-features-emotions-after.csv</h2>
+                    <a href="fme-24-features-emotions-after.csv" download="fme-24-features-emotions-after.csv" class="download-btn">
+                        <button>Download CSV</button>
+                    </a>
+                    <p class="download-description">
+                        The after CSV contains extracted audio features, arousal-valence values, and annotated emotion categories for each 2-second segment following participants’ emotion-change clicks.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleMoreInfo('after-emotions', this)">More Details</button>
+                    <div id="after-emotions" style="display: none; margin-top: 1em;">
+                        <p class="download-description">
+                            The after CSV provides a row-wise dataset where each row corresponds to a 2-second segment of a song immediately after a participant indicated an emotion change. It includes 179 audio feature columns capturing high-level acoustic and temporal properties, alongside arousal and valence coordinates reflecting perceived emotion. Each segment is annotated with emotion categories, both as names and numeric labels, and includes metadata such as file_path, timestamp, and timestamp_order. This also contains emotion sentences for each of the data points which are categorised using sentence transformers. This structure allows for detailed analysis of the temporal evolution of emotional responses to music across participants. 
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FME-24 Annotations CSV -->
+                <div class="download-section">
+                    <h2>fme-24-features-emotions-before.csv</h2>
+                    <a href="fme-24-features-emotions-before.csv" download="fme-24-features-emotions-before.csv" class="download-btn">
+                        <button>Download CSV</button>
+                    </a>
+                    <p class="download-description">
+                        The before CSV contains extracted audio features, arousal-valence values, annotated emotion categories, and emotion sentences for each 2-second segment immediately preceding participants’ emotion-change clicks.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleMoreInfo('before-emotions', this)">More Details</button>
+                    <div id="before-emotions" style="display: none; margin-top: 1em;">
+                        <p class="download-description">
+                            The before CSV provides a row-wise dataset where each row corresponds to a 2-second segment of a song immediately before a participant indicated an emotion change. It includes the same 179 audio feature columns as the after CSV, alongside arousal and valence coordinates reflecting perceived emotion, and metadata such as file_path, timestamp, and timestamp_order. Each segment is annotated with emotion categories, both as names and numeric labels, and also contains emotion sentences for each data point, which are categorized using sentence transformers to capture semantic content. This structure enables analysis of emotional responses prior to participants’ clicks and allows for comparisons between the “before” and “after” emotional states.
+                        </p>
+                    </div>
+                </div>
+
         <h2> ORIGINAL: </h2>
         <!-- FME-24 Annotations CSV -->
         <div class="download-section">
