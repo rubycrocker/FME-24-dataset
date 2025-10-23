@@ -221,3 +221,131 @@ canvas {
     max-width: 400px;
     margin-bottom: 30px;
 }
+
+/* =========================
+   FME-24 Table Styling
+========================= */
+
+.survey-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.survey-table th,
+.survey-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+/* Alternate row background */
+.survey-table tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+/* Header styling */
+.survey-table th {
+    background-color: #2c3e50;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    font-weight: 600;
+}
+
+/* Highlight entire column on hover */
+.highlight-col {
+    background-color: rgba(26, 188, 156, 0.2);
+    transition: background-color 0.25s ease;
+}
+
+/* Tooltip styling */
+.column-tooltip {
+    position: absolute;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    z-index: 1000;
+    max-width: 260px;
+    line-height: 1.4;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Distinguish columns slightly even when not hovered */
+.survey-table td,
+.survey-table th {
+    border-right: 1px solid #e0e0e0;
+}
+
+.survey-table td:last-child,
+.survey-table th:last-child {
+    border-right: none;
+}
+
+/* Make wide tables scrollable horizontally */
+.download-section {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* =========================
+   Publications Styling
+========================= */
+/* Publication list styling */
+#content ul {
+    list-style: none; /* remove bullets */
+    padding: 0;
+}
+
+#content li {
+    margin-bottom: 25px;
+    padding: 15px;
+    border-left: 4px solid #1abc9c;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    transition: box-shadow 0.3s;
+}
+
+#content li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.publication-link {
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+.publication-link:hover {
+    text-decoration: underline;
+    color: #1abc9c;
+}
+
+.publication-desc {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+.publication-desc a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.publication-desc a:hover {
+    text-decoration: underline;
+}

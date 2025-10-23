@@ -1,91 +1,138 @@
 //////////////////////////////////////////////////////////////////////////
-// initial js for navigating between pages and the download csv pages
-// and the interactive 'Tables Explained' Page and 'FME-24 Dataset' page
-
-
+// Page navigation & toggle info (unchanged)
+//////////////////////////////////////////////////////////////////////////
 function showPage(pageId) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-    
-    // Show the selected page
     document.getElementById(pageId).classList.add('active');
 }
-
 
 function toggleMoreInfo(infoId, button) {
     const info = document.getElementById(infoId);
     const isVisible = info.style.display === 'block';
-    
-    if (isVisible) {
-        info.style.display = 'none';
-        button.textContent = 'More Details';
-    } else {
-        info.style.display = 'block';
-        button.textContent = 'Hide Details';
-    }
+    info.style.display = isVisible ? 'none' : 'block';
+    button.textContent = isVisible ? 'More Details' : 'Hide Details';
 }
 
+//////////////////////////////////////////////////////////////////////////
+// SURVEY TABLE TOOLTIP (FME-Survey-Details.csv)
+//////////////////////////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
-    const table = document.getElementById("survey-table");
-    const tooltip = document.getElementById("column-tooltip");
+    const surveyTable = document.getElementById("survey-table");
+    const surveyTooltip = document.getElementById("column-tooltip");
 
-    const tooltipText = {
-        0: "This column shows participants anonymous randomly generated ID.",
-        1: "This column shows the date/time the survey was completed.",
-        2: "These columns show the information for audio file 1 for this participant: name, sentence, familiarity, AV ratings, timestamps, annotation counts",
-        3: "This column shows the participants' Age Range",
-        4: "countr(ies) that I spent most of my formative years",
-        5: "Gender",
-        6: "nationality",
-        7: "current occupation",
-        8: "These columns show the information for audio files 2-10 for this participant",
-        9:"I listen to music attentively ... day",
-        10:"I listen to music casually ... a day",
-        11:"I engaged in regular, daily practice of a musical instrument (including voice) for the following number of years",
-        12:"I am able to judge whether someone is a good singer or not",
-        13:"I find it difficult to spot mistakes in a performance of a song even if I know the tune.",
-        14:"I can compare and discuss differences between two performances or versions of the same piece of music.",
-        15:"I can tell when people sing or play out of time to the beat",
-        16:"I can tell when people sing or play out of tune",
-        17:" I would consider myself a musician.",
-        18:"I am familiar with music production and/or using DAWs etc",
-        19:"Music is very important to me:",
-        20:"I spend a lot of my free time doing music-related activities",
-        21:"Music is kind of an addiction for me – I couldn’t live without it",
-        22:"I keep track of new music that I come across (e.g. new artists or recordings)",
-        23:"I often read or search the internet for things related to music",
-        24:"My favourite genre of music is:",
-        25:"Pieces of music rarely evoke emotions for me",
-        26:"Music can evoke my memories of past people and places",
-        27:"I sometimes choose (to listen/to play) music that can trigger shivers down my spine",
-        28:"I often pick certain music to motivate or excite me",
-        29:"I am able to talk about the emotions that a piece of music evokes for me"
-        // Add more if needed for other columns
-    };
+    if (surveyTable && surveyTooltip) {
+        const tooltipText = {
+            0: "This column shows participants' anonymous randomly generated ID.",
+            1: "This column shows the date/time the survey was completed.",
+            2: "Information for audio file 1 (name, sentence, familiarity, AV ratings, etc.)",
+            3: "Participant's Age Range.",
+            4: "Countries where participants spent most of their formative years.",
+            5: "Gender.",
+            6: "Nationality.",
+            7: "Current occupation.",
+            8: "Information for audio files 2–10.",
+            9: "Time spent listening attentively to music each day.",
+            10: "Time spent listening casually each day.",
+            11: "Years of daily musical instrument practice.",
+            12: "Ability to judge if someone is a good singer.",
+            13: "Ability to spot mistakes in performances.",
+            14: "Ability to compare versions of the same piece.",
+            15: "Sense of timing in music.",
+            16: "Sense of pitch in music.",
+            17: "Self-identification as a musician.",
+            18: "Familiarity with DAWs and music production.",
+            19: "Importance of music in daily life.",
+            20: "Engagement in music-related activities.",
+            21: "Addiction-like connection to music.",
+            22: "Tracking new music discoveries.",
+            23: "Searching/reading about music online.",
+            24: "Favourite music genre.",
+            25: "Emotional response to music.",
+            26: "Music evoking memories.",
+            27: "Music evoking chills/shivers.",
+            28: "Using music for motivation.",
+            29: "Ability to describe emotions evoked by music."
+        };
 
-    for (let i = 0; i < 30; i++) {
-        const columnCells = table.querySelectorAll(`.col-${i}`);
+        for (let i = 0; i < 30; i++) {
+            const columnCells = surveyTable.querySelectorAll(`.col-${i}`);
 
-        columnCells.forEach(cell => {
-            cell.addEventListener("mouseenter", () => {
-                // Highlight the entire column
-                columnCells.forEach(c => c.classList.add("highlighted"));
-                tooltip.textContent = tooltipText[i] || "";
+            columnCells.forEach(cell => {
+                cell.addEventListener("mouseenter", e => {
+                    columnCells.forEach(c => c.classList.add("highlight-col"));
+                    surveyTooltip.textContent = tooltipText[i] || "";
+                    surveyTooltip.style.display = "block";
+                    surveyTooltip.style.left = e.pageX + "px";
+                    surveyTooltip.style.top = e.pageY + 15 + "px";
+                });
+
+                cell.addEventListener("mousemove", e => {
+                    surveyTooltip.style.left = e.pageX + "px";
+                    surveyTooltip.style.top = e.pageY + 15 + "px";
+                });
+
+                cell.addEventListener("mouseleave", () => {
+                    columnCells.forEach(c => c.classList.remove("highlight-col"));
+                    surveyTooltip.style.display = "none";
+                });
             });
-
-            cell.addEventListener("mouseleave", () => {
-                // Remove highlight
-                columnCells.forEach(c => c.classList.remove("highlighted"));
-                tooltip.textContent = "";
-            });
-        });
+        }
     }
 });
 
 //////////////////////////////////////////////////////////////////////////
+// FME ANNOTATION TABLE TOOLTIP (FME-24 CSV EXPLAINED)
 //////////////////////////////////////////////////////////////////////////
+document.addEventListener('DOMContentLoaded', function () {
+    const fmeTooltips = {
+        0: 'Full file path of the audio excerpt.',
+        1: 'Timestamp marking where emotion changed by participant.',
+        2: 'Arousal, Valence values at the timestamp.',
+        3: 'Sentence describing perceived emotion.',
+        4: 'Participant familiarity rating.',
+        5: 'Participant identifier number.',
+        6: 'Metadata related to the film/music context; film title, song title, genre, composer, director, ISRC.',
+        7: 'Sequential timestamp: the nth timestamp a participant recorded for a given audio excerpt (e.g., the 4th timestamp)',
+        8: 'Extracted musical features (179 total), spectral, rhythm, texture, energy, pitch, perceptual features',
+        9: 'Sub-sentence–level emotion category matches and splits.',
+        10: 'Row ID (unique index for data entry).',
+        11: 'Emotion Category Name (e.g., “Happy/Joy”).',
+        12: 'Emotion Category ID (integer label, Happy/Joy = 2).'
+    };
+
+    const fmeTable = document.getElementById('fme-anno-table');
+    const fmeTooltip = document.getElementById('fme-tooltip');
+
+    if (fmeTable && fmeTooltip) {
+        for (let i = 0; i <= 12; i++) {
+            const columnCells = fmeTable.querySelectorAll(`.col-${i}`);
+
+            columnCells.forEach(cell => {
+                cell.addEventListener('mouseenter', e => {
+                    // highlight entire column
+                    columnCells.forEach(c => c.classList.add('highlight-col'));
+                    // show tooltip
+                    fmeTooltip.textContent = fmeTooltips[i] || '';
+                    fmeTooltip.style.display = 'block';
+                    fmeTooltip.style.left = e.pageX + 'px';
+                    fmeTooltip.style.top = e.pageY + 15 + 'px';
+                });
+
+                cell.addEventListener('mousemove', e => {
+                    fmeTooltip.style.left = e.pageX + 'px';
+                    fmeTooltip.style.top = e.pageY + 15 + 'px';
+                });
+
+                cell.addEventListener('mouseleave', () => {
+                    columnCells.forEach(c => c.classList.remove('highlight-col'));
+                    fmeTooltip.style.display = 'none';
+                });
+            });
+        }
+    }
+});
 
 
 //////////////////////////////////////////////////////////////////////////
