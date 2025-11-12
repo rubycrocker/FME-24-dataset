@@ -349,3 +349,35 @@ canvas {
 .publication-desc a:hover {
     text-decoration: underline;
 }
+
+/* ---------- Layout ---------- */
+#plot-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+#graph {
+  width: 65%;
+  height: 70vh;
+  min-width: 500px;
+}
+
+#info-box {
+  width: 30%;
+  height: 70vh;
+  border: 1px solid #ccc;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+#info-box h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.point-hover {
+  cursor: pointer;
+}
+

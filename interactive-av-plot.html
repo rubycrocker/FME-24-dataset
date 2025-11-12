@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arousal–Valence Plot</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Plotly and D3 -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    /* Basic layout for graph and info box side by side */
+    #plot-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    #graph {
+      width: 70%;
+      height: 70vh;
+    }
+
+    #info-box {
+      width: 28%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      font-size: 0.9rem;
+      overflow-y: auto;
+      max-height: 70vh;
+    }
+
+    #key {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #key div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #key div span {
+      font-size: 0.9rem;
+    }
+
+    #key div div {
+      width: 15px;
+      height: 15px;
+      border: 1px solid #000;
+    }
+
+    /* Toggle button styling */
+    .trajectory-btn {
+      padding: 6px 12px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .trajectory-btn:hover {
+      background-color: #666;
+    }
+
+    .trajectory-btn.active {
+      background-color: #0088cc;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+      <a href="index.html">Home</a>
+      <a href="FME-24-dataset.html">FME-24 Dataset</a>
+      <a href="interactivegraph.html">Interactive Graph</a>
+      <a href="interactive-fme-dataset.html">Interactive FME Dataset</a>
+      <a href="publications.html">Publications</a>
+      <a href="survey-results.html">CSVs Explained</a>
+      <a href="interactive-av-plot.html" class="active">Arousal–Valence Plot</a>
+  </div>
+
+  <div id="content">
+      <h1>Interactive Arousal–Valence Emotion Space</h1>
+      <p>Each point is a music sample from a film soundtrack, plotted by its emotional <b>valence</b> (positivity) and <b>arousal</b> (energy). Click a point to view more details.</p>
+
+      <div id="plot-container">
+        <div id="graph"></div>
+        <div id="info-box">
+          <h3>Song Info</h3>
+          <p>Click a dot to view details.</p>
+        </div>
+      </div>
+
+      <!-- Color key -->
+      <div id="key"></div>
+  </div>
+
+  <script src="interactive-av-plot.js"></script>
+</body>
+</html>
