@@ -298,4 +298,34 @@ Emotion sentence:
 ║final_category_number    ║ final_category_number = numeric code for final_category_name  # e.g., 0=Negative, 1=Positive ║
 ╠═══════════════════╬═══════════════════════════════════════════════════════════════════════╣
 
+Highly correlated feature PAIRS (>0.95):
+
+mfcc_accel                 <-->  mfcc_motion                 corr = 0.974
+timbre_stability           <-->  repetition_contrast         corr = 1.000
+num_frames                 <-->  compression_ratio           corr = 1.000
+rolloff_85_mean            <-->  spectral_centroid_mean      corr = 0.983
+num_frames_used            <-->  compression_ratio           corr = 1.000
+num_frames_used            <-->  num_frames                  corr = 1.000
+num_downbeats              <-->  num_beats                   corr = 0.955
+ioi_std                    <-->  tempo_std                   corr = 1.000
+ioi_max                    <-->  ioi_mean                    corr = 0.999
+ioi_min                    <-->  ioi_mean                    corr = 0.999
+ioi_min                    <-->  ioi_max                     corr = 0.996
+vibrato_extent             <-->  pitch_std                   corr = 1.000
+timbre_variability         <-->  timbre_noisiness            corr = 1.000
+dynamic_expressivity       <-->  spectral_flatness_var       corr = 0.963
+beat_regularity            <-->  tempo_std                   corr = 1.000
+beat_regularity            <-->  ioi_std                     corr = 1.000
+tonal_stability            <-->  key_strength                corr = 1.000
+pitch_height               <-->  compression_ratio           corr = 1.000
+pitch_height               <-->  num_frames                  corr = 1.000
+pitch_height               <-->  num_frames_used             corr = 1.000
+centroid                   <-->  spectral_centroid_mean      corr = 1.000
+centroid                   <-->  rolloff_85_mean             corr = 0.982
+rolloff                    <-->  timbre_brightness           corr = 0.999
+tempo_bpm                  <-->  bpm                         corr = 1.000
+leaps_on_strong_beats      <-->  step_leap_ratio             corr = 0.983
+
+Columns to drop: 'beat_regularity', 'tonal_stability', 'timbre_stability', 'timbre_variability', 'ioi_std', 'mfcc_accel', 'num_frames', 'ioi_max', 'rolloff', 'vibrato_extent', 'tempo_bpm', 'num_frames_used', 'num_downbeats', 'rolloff_85_mean', 'ioi_min', 'dynamic_expressivity', 'pitch_height', 'centroid', 'leaps_on_strong_beats'
+
 
