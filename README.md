@@ -2,10 +2,35 @@
 
 **FME-24** is a curated dataset of contemporary film music excerpts annotated with perceived emotion over time. The dataset was created to support research in Music Information Retrieval (MIR), music psychology, AI-driven emotion analysis, and generative composition.
 
+The dataset now includes 1784 rows, 91 columns with 78 features, covering 98 participants, 422 excerpts, and 275 unique songs.
 
 ## Dataset Contents
 
-The repository contains the following CSV files:
+The repository contains several CSV files, organized by update and purpose:
+
+Main CSVs (March 2026 – V-A regression)
+These CSVs are the most up-to-date and suitable for continuous emotion analysis, regression, and feature-based research:
+
+ - `librosa_features_full_fme_dataset_MARCH_2026_NC.csv`
+This CSV contains 1784 rows and 91 columns, including 78 acoustic, spectral, harmonic, and rhythm features extracted from 422 audio excerpts across 98 participants and 275 unique songs. It includes valence-arousal (V-A) annotations, timestamps, familiarity ratings, and emotion sentences, and is designed for regression or machine learning analyses predicting continuous emotion values.
+
+ - `fme-demographics-music-sophistication.csv`
+Contains participant demographics and GoldMSI music sophistication responses. This CSV maps participant ID to survey responses, with 100 participants recorded, though 2 were removed from the March 2026 main CSV due to missing V-A annotations or timestamps.
+
+ - `per-song-fme.csv`
+Raw data in per-song format. Each row corresponds to a song excerpt with missing data included. Useful for understanding how the dataset was originally extracted from the online experiment, but not necessary for primary analyses.
+
+ - `film-emotion-music-datasheet.csv`
+   Music and Film metadata on the music files; including timestamps of the excerpts in the full audio track, ISRC numbers, size, length, sample rate, composer, genre, director and year.
+
+   
+
+Other 2026 March CSVs are included here which support the CSVs above.
+`librosa_features_full_fme_dataset_MARCH_2026.csv` has non-numerical data for some features (example: key and scale).
+
+
+Older CSVs (September 2025 – Emotion Category / Before & After)
+These CSVs focus on categorical emotion analysis rather than continuous V-A prediction. They include feature sets before and after emotional-change timestamps:
 
 - `fme-24-features-emotions-after.csv`  
   Contains emotion annotations and extracted audio features **at/after each emotional-change timestamp**, reflecting the participant's emotional state **after** marking a change.
@@ -16,36 +41,30 @@ The repository contains the following CSV files:
 > Both CSV files are aligned in row order and can be merged for time-series analyses of emotional change (`ΔV` / `ΔA`).
 > The 'after' csv contains the AV associated with time-stamps, the 'before' csv was created if a before/after comparison is needed.
 
+Older versions
+Additional CSVs provide earlier versions of annotations, features, and metadata. These include participant-matched annotations, raw survey responses, chord extractions, and sample metadata. These are preserved for reference but are not recommended for primary analysis.
+
 ---
 
-## CSV File Structure
+## Main CSV Detailed Description
 
-Each CSV contains the following columns:
+Each row represents a single participant’s annotation of a 2-second music segment. Columns include:
 
-| Column | Description |
-|--------|-------------|
-| **Pathname** | File path or reference to the audio segment (audio itself is not included due to copyright). |
-| **TS Timestamp** | Timestamp (in seconds) of the annotation event. |
-| **V-A** | Valence and Arousal values. For example, `V = 0.75`, `A = 0.32`. |
-| **Emotion Sentence** | Free-text “emotion sentence” provided by the participant describing the emotion. |
-| **Familiarity Rating** | Familiarity rating (Likert scale) indicating how familiar the participant is with the music. |
-| **Participant ID** | Participant ID. |
-| **Metadata** | Metadata about the track, including film title, release year, and composer. |
-| **Timestamp Number** | Annotation order for the participant for that track. |
-| **Features** | 179 extracted audio features (frequency, timbre, key, texture, etc.) in numeric format. |
-| **Emotion Category Match** | Derived emotion category from the participant’s free-text sentence. |
-| **Row ID** | Row ID (unique for dataset management). |
-| **Emotion Category Name** | Emotion category name (e.g., `happy`, `sad`). |
-| **Emotion Category ID** | Numerical ID for the emotion category. |
+Participant ID, file path, timestamp, emotion sentence, familiarity, valence-arousal ratings, timestamped annotations.
 
-> **Note:** Features were extracted in 2-second windows around each timestamp to capture the musical context of emotional change. There are 179 Features extracted.
+Extracted audio features: MFCC means & variances, Tonnetz descriptors, spectral centroids, zero-crossing rate, RMS, harmonic & percussive energy ratios, pitch statistics, chord root/type, key & scale, rhythm metrics (BPM, onset density), and derived timbre measures.
+
+Emotion categories (names and IDs) derived from semantic analysis of participants’ free-text sentences.
+
+This structure allows detailed analysis of perceptual and acoustic correlates of emotion in music, including time-series exploration, regression, clustering, or machine learning.
+
 >
 > ## How to Use
 
 > **Load the CSV** in Python
-> **Merge** before and after if you want to calculate emotional change vectors
-> **Feature selection:** Use the 179 audio features for machine learning, regression, or clustering tasks
-> **Using metadata:** Track film title, composer, year, or participant ID to subset or aggregate data for your analysis.
+> **Feature selection:** Use the 78 numeric features for modeling, regression, clustering, or music analysis.
+> Subset/aggregate data using track metadata (film title, composer, year) or participant information.
+>**Participant Information** Use the 'participant-ID' to filter out participants with different musical experiences or demographics to compare responses.
 
 
 > ## Licensing & Audio Access
@@ -56,8 +75,8 @@ Each CSV contains the following columns:
 > ## Notes
 > Timestamps are relative to audio segments, not full film scenes.
 > Emotion categories are derived from free-text annotations and mapped to standard emotion labels (based on research of emotion models).
-> Participants: 93 annotators with varying musical expertise; demographic metadata is included in csv: **FME-Survey-Details.csv**
-> Original dataset information of the audiofiles in csv: **film-emotion-music-dataset-metadata.csv**
+> Participants: 98 annotators with varying musical expertise; demographic metadata is included in csv: **fme-demographics-music-sophisication.csv**
+> Original dataset information of the audiofiles in csv: **film-emotion-music-datasheet.csv**
 > Explore annotations on page: **https://rubycrocker.github.io/FME-24-dataset/interactive-fme-dataset.html**
 > Participants did not have accompanying visuals when annotating audio files.
 > There are other downloadable CSVs with the data in different formats.
