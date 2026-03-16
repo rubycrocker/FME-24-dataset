@@ -20,15 +20,103 @@
     <div id="content">
         <h1>FME-24 Dataset</h1>
         <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
-        <p>The first CSV listed here at the top of the page is the best for individual marker annotations (one arousal/valence coordinate per row) and doesn't include feature extraction.</p>
-        <p>The second CSV here is a different format structure of the page data; each row is per song sample per participant (so it contains multiple emotion annotations).</p>
+        <p>The first CSVs listed here at the top of the page are the most up to date CSVs used for regression analysis for V-A prediction and participants demographics and GoldMSI responses.</p>
+        <p>The second CSVs here are in a different format for categorical data based on emotion sentence semantic analysis, where there are before and after features extracted and composite features included, this is dated and advised not to used. </p>
+
 
         <!-- Latest Update Section -->
-        <h2>SEPT 2025 Update:</h2>
+        <h2>MARCH 2026 Update: CSV for continuous emotion analysis V-A (regression) </h2>
+
+        <div class="download-section-2026-latest-update">
+            <h2>librosa_features_full_fme_dataset_MARCH_2026_NC.csv</h2>
+            <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/librosa_features_full_fme_dataset_MARCH_2026_NC.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                Main CSV: This CSV contains 1784 rows and 91 columns, including 78 acoustic, spectral, harmonic, and rhythm features extracted from 422 audio excerpts across 98 participants and 275 unique songs, providing a comprehensive dataset for audio-emotion and music analysis, with V-A annotations, timestamps, familiarity ratings and emotion sentences.
+            </p>
+            <button class="toggle-btn" onclick="toggleMoreInfo('2026-data', this)">More Details</button>
+            <div id="2026-data" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    The dataset captures timestamped segments of audio annotated with emotional responses, familiarity, valence, and arousal. Each segment includes a rich set of features such as MFCC means and variances, Tonnetz descriptors, spectral centroids, zero-crossing rate, RMS, harmonic and percussive energy ratios, pitch statistics, chord information, key and scale, rhythm metrics including beats per minute and onset density, and other derived measures of timbre and structure. The data is organized by participant and file, allowing detailed exploration of both perceptual annotations and precise acoustic measurements for each excerpt.
+            </div>
+        </div>
+
+        <div class="download-section-2026-goldmsi">
+            <h2>fme-demographics-music-sophistication.csv</h2>
+            <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/fme-demographics-music-sophistication.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                Participants info: GoldMSI and Demographics CSV. This CSV contains GoldMSI responses and demographic information about the participants.
+            </p>
+            <button class="toggle-btn" onclick="toggleMoreInfo('2026-participants', this)">More Details</button>
+            <div id="2026-participants" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    Particiipant ID corresponding with demographics and Music Sophistication inputs per participant. 100 participants although 2 were removed in the march_2026_csv due to lack of V-A annotations and timestmaps. This CSV can be used to look aat certain subgroups within the main dataset, or for more information in demographics in the dataset.
+            </div>
+        </div>
+
+        <div class="download-section-2026-goldmsi">
+            <h2>per-song-fme.csv</h2>
+            <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/per-song-fme.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+            <p class="download-description">
+                This CSV contains the raw data in a different format, where each row is one of the excerpts which includes missing data and coordinates together as arrays rather than per column, this is how the data was extracted raw from the online experiment. 
+            </p>
+            <button class="toggle-btn" onclick="toggleMoreInfo('2026-raw-data', this)">More Details</button>
+            <div id="2026-raw-data" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    Raw Data directly extracted from the online survey. This data contains the missing information before cleaned for features extraction and pre-processing, this CSV doesn't need to be used but provides information on the data before it was cleaned. 
+            </div>
+        </div>
+
+
+
+         <!-- 2026 CSVs FULL Section -->
+        <h2>ALL 2026 CSVs</h2>
+        <button class="toggle-btn" onclick="toggleMoreInfo('all-2026-csvs', this)">Show/Hide 2026 CSVs</button>
+        <div id="all-2026-csvs" style="display: none; margin-top: 1em;">
+
+            <!-- 2026 CSVs -->
+            <div class="download-section all-2026-csvs">
+                <h2>Copy_rubysFMEsurvey_excel.csv</h2>
+                <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/Copy_rubysFMEsurvey_excel.csv" download class="download-btn">
+                    <button>Download CSV</button>
+                </a>
+                <p class="download-description">
+            </div>
+            <div class="download-section all-2026-csvs">
+                <h2>all_timestamps.csv</h2>
+                <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/all_timestamps.csv" download class="download-btn">
+                    <button>Download CSV</button>
+                </a>
+                <p class="download-description">
+            </div>
+            <div class="download-section all-2026-csvs">
+                <h2>film-emotion-music-dataset-excel.csv</h2>
+                <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/film-emotion-music-dataset-excel.csv" download class="download-btn">
+                    <button>Download CSV</button>
+                </a>
+                <p class="download-description">
+            </div>
+            <div class="download-section all-2026-csvs">
+                <h2>librosa-full-features-MARCH2026-fme-dataset.csv</h2>
+                <a href="/Users/rubycrocker/FME-24-dataset/2026-csvs/librosa-full-features-MARCH2026-fme-dataset.csv" download class="download-btn">
+                    <button>Download CSV</button>
+                </a>
+                <p class="download-description">
+            </div>
+
+        </div>
+
+        <!-- Latest Update Section -->
+        <h2>SEPT 2025 Update: CSVs for emotion category analysis (not V-A) </h2>
 
         <div class="download-section latest-update">
             <h2>fme-24-features-emotions-after.csv</h2>
-            <a href="fme-24-features-emotions-after.csv" download class="download-btn">
+            <a href="/old-csvs/fme-24-features-emotions-after.csv" download class="download-btn">
                 <button>Download CSV</button>
             </a>
             <p class="download-description">
@@ -44,7 +132,7 @@
 
         <div class="download-section latest-update">
             <h2>fme-24-features-emotions-before.csv</h2>
-            <a href="fme-24-features-emotions-before.csv" download class="download-btn">
+            <a href="/old-csvs/fme-24-features-emotions-before.csv" download class="download-btn">
                 <button>Download CSV</button>
             </a>
             <p class="download-description">
@@ -66,7 +154,7 @@
             <!-- Old CSVs -->
             <div class="download-section older-version">
                 <h2>FME-24-Annotations.csv</h2>
-                <a href="FME-24-Annotations.csv" download class="download-btn">
+                <a href="/old-csvs/FME-24-Annotations.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -82,7 +170,7 @@
 
             <div class="download-section older-version">
                 <h2>fme_emotion_with_correct_path_matches.csv</h2>
-                <a href="fme_emotion_with_correct_path_matches.csv" download class="download-btn">
+                <a href="/old-csvs/fme_emotion_with_correct_path_matches.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -92,7 +180,7 @@
 
             <div class="download-section older-version">
                 <h2>annotations_with_path_matches.csv</h2>
-                <a href="annotations_with_path_matches.csv" download class="download-btn">
+                <a href="/old-csvs/annotations_with_path_matches.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -102,7 +190,7 @@
 
             <div class="download-section older-version">
                 <h2>fme-per-sample-per-participant-annotation.csv</h2>
-                <a href="fme-per-sample-per-participant-annotation.csv" download class="download-btn">
+                <a href="/old-csvs/fme-per-sample-per-participant-annotation.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -112,7 +200,7 @@
 
             <div class="download-section older-version">
                 <h2>469-audio-samples-fme-24-metadata.csv</h2>
-                <a href="469-audio-samples-fme-24-metadata.csv" download class="download-btn">
+                <a href="/old-csvs/469-audio-samples-fme-24-metadata.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -122,7 +210,7 @@
 
             <div class="download-section older-version">
                 <h2>FME-chord-extraction-before-after.csv</h2>
-                <a href="chord-extraction-fme-24.csv" download class="download-btn">
+                <a href="/old-csvs/chord-extraction-fme-24.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -132,7 +220,7 @@
 
             <div class="download-section older-version">
                 <h2>FME_24-Dataset-Librosa-Feature-Extraction.csv</h2>
-                <a href="FME_24-Dataset-Librosa-Feature-Extraction.csv" download class="download-btn">
+                <a href="/old-csvs/FME_24-Dataset-Librosa-Feature-Extraction.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -142,7 +230,7 @@
 
             <div class="download-section older-version">
                 <h2>FME-dataset-metadata.csv</h2>
-                <a href="film-emotion-music-dataset-metadata.csv" download class="download-btn">
+                <a href="/old-csvs/film-emotion-music-dataset-metadata.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -152,7 +240,7 @@
 
             <div class="download-section older-version">
                 <h2>fme-93-matched_participants.csv</h2>
-                <a href="fme-93-matched_participants.csv" download class="download-btn">
+                <a href="/old-csvs/fme-93-matched_participants.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
@@ -162,7 +250,7 @@
 
             <div class="download-section older-version">
                 <h2>FME-Survey-Details.csv</h2>
-                <a href="FME-Survey-Details.csv" download class="download-btn">
+                <a href="/old-csvs/FME-Survey-Details.csv" download class="download-btn">
                     <button>Download CSV</button>
                 </a>
                 <p class="download-description">
