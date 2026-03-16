@@ -153,7 +153,7 @@ p {
 }
 
 /* Latest update styling */
-.download-section.latest-update {
+.download-section.latest-march-update {
     border: 3px solid #1abc9c;
     background-color: #e0f7f2;
     padding: 20px;
@@ -162,7 +162,7 @@ p {
     opacity: 1; /* full opacity */
 }
 
-.download-section.latest-update h2 {
+.download-section.latest-march-update h2 {
     color: #0f8f75;
     font-style: normal;
 }
