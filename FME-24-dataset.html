@@ -21,6 +21,7 @@
         <h1>FME-24 Dataset</h1>
         <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
         <p>The first four CSVs (March 2026 Update) listed here at the top of the page are the most up to date CSVs used for regression analysis for V-A prediction and participants demographics and GoldMSI responses.</p>
+        <p>The fifth CSV (April 2026 Update) provides emotion categories derived from participants’ free-text emotion sentences. These are generated using semantic clustering and probabilistic labelling, offering a flexible, interpretable representation of emotional meaning beyond the standard Valence–Arousal dimensions.</p>
         <p>The second CSVs (Sept 2025 Update) here are in a different format for categorical data based on emotion sentence semantic analysis, where there are before and after features extracted and composite features included, this is dated and advised not to used. </p>
 
 
@@ -87,10 +88,61 @@
             </div>
         </div>
 
+            <!-- Latest Update Section -->
+                <h2>MARCH 2026 Update: CSV for continuous emotion analysis V-A (regression) </h2>
 
+                <div class="download-section latest-march26-update">
+                    <h2>librosa_features_full_fme_dataset_MARCH_2026_NC.csv</h2>
+                    <a href="2026-csvs/librosa_features_full_fme_dataset_MARCH_2026_NC.csv" download class="download-btn">
+                        <button>Download CSV</button>
+                    </a>
+                    <p class="download-description">
+                        Main CSV: This CSV contains 1784 rows and 91 columns, including 78 acoustic, spectral, harmonic, and rhythm features extracted from 422 audio excerpts across 98 participants and 275 unique songs, providing a comprehensive dataset for audio-emotion and music analysis, with V-A annotations, timestamps, familiarity ratings and emotion sentences.
+                    </p>
+                    <button class="toggle-btn" onclick="toggleMoreInfo('2026-data', this)">More Details</button>
+                    <div id="2026-data" style="display: none; margin-top: 1em;">
+                        <p class="download-description">
+                            The dataset captures timestamped segments of audio annotated with emotional responses, familiarity, valence, and arousal. Each segment includes a rich set of features such as MFCC means and variances, Tonnetz descriptors, spectral centroids, zero-crossing rate, RMS, harmonic and percussive energy ratios, pitch statistics, chord information, key and scale, rhythm metrics including beats per minute and onset density, and other derived measures of timbre and structure. The data is organized by participant and file, allowing detailed exploration of both perceptual annotations and precise acoustic measurements for each excerpt.
+                    </div>
+                </div>
+        
+<!-- APRIL 2026 Update Section -->
+<h2>APRIL 2026 Update: Emotion Categories from Free-Text Sentences</h2>
+
+<div class="download-section april26-update">
+    <h2>emotion_clean_dataset_29APRIL2026.csv</h2>
+    <a href="2026-csvs/emotion_clean_dataset_29APRIL2026.csv" download class="download-btn">
+        <button>Download CSV</button>
+    </a>
+    <p class="download-description">
+        Emotion-labelled dataset: This CSV extends the main FME-24 dataset by adding structured emotion categories derived from participants’ free-text emotion sentences. Each row includes refined emotion phrases, cluster-based labels, and probabilistic emotion scores (top-1, top-2, top-3), alongside the original audio features, timestamps, and annotations.
+    </p>
+    <button class="toggle-btn" onclick="toggleMoreInfo('2026-emotion-data', this)">More Details</button>
+    <div id="2026-emotion-data" style="display: none; margin-top: 1em;">
+        <p class="download-description">
+            This dataset captures how participants describe emotion in natural language and maps it into interpretable categories. Emotion sentences were first cleaned and split into time-aligned clauses, then reduced to short “refined emotion clauses” using a language model. These were embedded using a Sentence Transformer and grouped using clustering methods. Final emotion labels are assigned probabilistically based on similarity to category centres, meaning each data point can express multiple emotional influences rather than a single fixed label. 
+            <br><br>
+            Key columns include:
+            <br>
+            • <b>refined_emotion_clause</b>: short, standardised emotion phrase  
+            <br>
+            • <b>cluster_name</b>: main category label  
+            <br>
+            • <b>top1_label / top2_label / top3_label</b>: ranked emotion predictions  
+            <br>
+            • <b>confidence</b>: strength of the top prediction  
+            <br>
+            • <b>ambiguity</b>: how similar the top predictions are  
+            <br>
+            • <b>final_label_clean</b>: simplified label (e.g. “ambiguous”) for safe use  
+            <br><br>
+            This CSV is designed for categorical emotion analysis and complements the continuous Valence–Arousal data by capturing richer, language-based emotional descriptions.
+        </p>
+    </div>
+</div>
 
          <!-- 2026 CSVs FULL Section -->
-        <h2>ALL 2026 CSVs</h2>
+        <h2>ALL 2026 CSVs:</h2>
         <button class="toggle-btn" onclick="toggleMoreInfo('all-2026-csvs', this)">Show/Hide 2026 CSVs</button>
         <div id="all-2026-csvs" style="display: none; margin-top: 1em;">
 
