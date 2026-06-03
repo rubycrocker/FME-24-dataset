@@ -1,90 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Interactive FME Dataset</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<meta charset="UTF-8">
+<title>AV Trajectories</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+
 <body>
 
-  <!-- Sidebar (same as your other pages) -->
-  <div id="sidebar">
-    <a href="index.html">Home</a>
-    <a href="FME-24-dataset.html">FME-24 Dataset</a>
-    <a href="interactivegraph.html">Interactive Graph</a>
-    <a href="interactive-fme-dataset.html" class="active">Interactive FME Dataset</a>
-    <a href="publications.html">Publications</a>
-    <a href="survey-results.html">CSVs Explained</a>
-    <a href="interactive-av-plot.html">Arousal–Valence Plot</a>
+<div id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="FME-24-dataset.html">FME-24 Dataset</a>
+  <a href="interactivegraph.html">Interactive Graph</a>
+  <a href="interactive-fme-dataset.html">Interactive FME Dataset</a>
+  <a href="publications.html">Publications</a>
+  <a href="survey-results.html">CSVs Explained</a>
+  <a href="interactive-av-plot.html"class="active">Arousal–Valence Plot</a>
+</div>
+
+<div id="content">
+
+<h1>Arousal–Valence Explorer</h1>
+
+<select id="emotionFilter" class="toggle-btn">
+  <option value="all">All emotions</option>
+  <option value="happy">Happy</option>
+  <option value="sad">Sad</option>
+  <option value="fear">Fear</option>
+  <option value="calm">Calm</option>
+  <option value="uncertain">Uncertain</option>
+  <option value="excited">Excited</option>
+  <option value="nostalgic">Nostalgic</option>
+  <option value="hopeful">Hopeful</option>
+  <option value="curious">Curious</option>
+  <option value="relief">Relief</option>
+  <option value="tense">Tense</option>
+  <option value="anticipation">Anticipation</option>
+</select>
+
+<button id="resetViewBtn" class="toggle-btn">Reset</button>
+
+<div id="plot-container">
+
+  <div id="graph"></div>
+
+  <div id="info-box">
+    <h3>Selected Point</h3>
+    <div id="info"></div>
   </div>
 
-<!-- Main content -->
-<div id="content">
-    <h1>Interactive Arousal–Valence Plot</h1>
-    <p>Select a sample from the dropdown below to explore participant trajectories.</p>
-  
-    <select id="sample-dropdown" style="width: 100%; padding: 8px; font-size: 1rem; margin-bottom: 20px;">
-      <option value="" disabled selected>Select a sample</option>
-    </select>
-  
-    <div id="graph" style="height: 600px;"></div>
 </div>
-  
-  
+
+</div>
+
 <script>
-    let fullData = {};
-  
-    async function fetchData() {
-      try {
-        const res = await fetch('plot_data2.json');
-        fullData = await res.json();
-  
-        const dropdown = document.getElementById('sample-dropdown');
-  
-        // Populate dropdown options with pathname keys
-        Object.keys(fullData).forEach(sampleName => {
-          const option = document.createElement('option');
-          option.value = sampleName;
-          option.textContent = sampleName;
-          dropdown.appendChild(option);
-        });
-  
-        // When user selects a sample, plot its data
-        dropdown.addEventListener('change', (event) => {
-          const selectedSample = event.target.value;
-          plotSample(selectedSample);
-        });
-  
-        // Auto-select first sample if available
-        const firstSample = Object.keys(fullData)[0];
-        if (firstSample) {
-          dropdown.value = firstSample;
-          plotSample(firstSample);
-        }
-  
-      } catch (e) {
-        console.error('Could not load graph:', e);
-        document.getElementById('graph').innerText = 'Error loading the graph.';
-      }
-    }
-  
-    function plotSample(sampleName) {
-      const data = fullData[sampleName];
-  
-      const layout = {
-        title: sampleName + ' - Arousal–Valence',
-        xaxis: { title: 'Valence', range: [-1, 1], zeroline: true },
-        yaxis: { title: 'Arousal', range: [-1, 1], zeroline: true },
-        hovermode: 'closest',
-        showlegend: true
-      };
-  
-      Plotly.newPlot('graph', data, layout);
-    }
-  
-    fetchData();
-  </script>
-  
-  
+
+// ======================
+// STATE
+// ======================
+let dataset = [];
+let activeEmotion = "all";
+let selectedTraj = null;
+
+// ======================
+// COLOURS
+// ======================
+const emotionColors = {
+  happy: "#f39c12",
+  hopeful: "#f1c40f",
+  sad: "#3498db",
+  fear: "#8e44ad",
+  tense: "#9b59b6",
+  calm: "#2ecc71",
+  excited: "#e67e22",
+  nostalgic: "#1abc9c",
+  curious: "#16a085",
+  anticipation: "#d35400",
+  relief: "#27ae60",
+  uncertain: "#95a5a6"
+};
+
+// ======================
+// LOAD DATA
+// ======================
+async function loadData() {
+  const res = await fetch("av_trajectories.json");
+  dataset = await res.json();
+  drawBase();
+}
+
+// ======================
+// FLATTEN DATA
+// ======================
+function getFlatPoints() {
+
+  let xs = [], ys = [], color = [], meta = [];
+
+  dataset.forEach(traj => {
+    traj.points.forEach(p => {
+
+      if (activeEmotion !== "all" && p.emotion !== activeEmotion) return;
+
+      xs.push(p.x);
+      ys.push(p.y);
+
+      color.push(emotionColors[p.emotion] || "#ccc");
+
+      meta.push({ traj, point: p });
+    });
+  });
+
+  return { xs, ys, color, meta };
+}
+
+// ======================
+// BASE SCATTER (ALWAYS VISIBLE)
+// ======================
+function drawBase(highlightTraj = null) {
+
+  const flat = getFlatPoints();
+
+  // grey-out if trajectory selected
+  let colors = flat.color;
+  let sizes = new Array(flat.xs.length).fill(7);
+
+  if (highlightTraj) {
+    colors = flat.color.map(() => "rgba(180,180,180,0.25)");
+  }
+
+  const baseTrace = {
+    x: flat.xs,
+    y: flat.ys,
+    mode: "markers",
+    marker: {
+      size: sizes,
+      color: colors,
+      line: { width: 0.5}
+    },
+    customdata: flat.meta,
+    hoverinfo: "none"
+  };
+
+  const layout = {
+    xaxis: {
+      title: "Valence",
+      range: [-1, 1],
+      zeroline: true
+    },
+    yaxis: {
+      title: "Arousal",
+      range: [-1, 1],
+      zeroline: true
+    },
+    hovermode: "closest"
+  };
+
+  const data = [baseTrace];
+
+  // overlay trajectory if selected
+  if (highlightTraj) {
+    const sorted = [...highlightTraj.points].sort((a,b)=>a.t-b.t);
+
+    const x = sorted.map(p => p.x);
+    const y = sorted.map(p => p.y);
+
+    const startIndex = sorted.reduce((minIdx, p, i, arr) =>
+      p.t < arr[minIdx].t ? i : minIdx, 0
+    );
+
+    const trajTrace = {
+      x,
+      y,
+      mode: "lines+markers+text",
+      line: {width: 2 },
+      marker: {
+        size: sorted.map((p,i)=>
+          i === startIndex ? 14 : 10
+        ),
+        color: sorted.map((p,i)=>
+          i === startIndex ? "#000" : emotionColors[p.emotion] || "#999"
+        ),
+        line: { width: 1}
+      },
+      text: sorted.map(p => p.refined || ""),
+      textposition: "top center",
+      hoverinfo: "none"
+    };
+
+    data.push(trajTrace);
+  }
+
+  Plotly.react("graph", data, layout);
+
+  document.getElementById("graph").on('plotly_click', e => {
+    const meta = e.points[0].customdata;
+    showTrajectory(meta.traj, meta.point);
+  });
+}
+
+// ======================
+// CLICK → SHOW TRAJECTORY
+// ======================
+function showTrajectory(traj, clickedPoint) {
+
+  selectedTraj = traj;
+
+  drawBase(traj);
+
+  const sorted = [...traj.points].sort((a,b)=>a.t-b.t);
+
+  renderInfo(sorted, clickedPoint);
+}
+
+// ======================
+// INFO PANEL (FIXED + emotion_sentence added)
+// ======================
+function renderInfo(sorted, clickedPoint) {
+
+  const trajectoryHTML = sorted.map((p,i) => `
+    <div style="padding:6px;margin-bottom:6px;border-left:4px solid ${emotionColors[p.emotion] || "#999"};">
+      <b>Point ${i+1}</b><br>
+      <b>Emotion:</b> ${p.emotion}<br>
+      <b>Refined:</b> ${p.refined || "—"}<br>
+      <b>Valence:</b> ${p.x}<br>
+      <b>Arousal:</b> ${p.y}<br>
+      <b>Time:</b> ${p.t}
+    </div>
+  `).join("");
+
+  document.getElementById("info").innerHTML = `
+    <div style="padding:10px;background:#eee;margin-bottom:15px;">
+      <b>Emotion:</b> ${clickedPoint.emotion}<br>
+      <b>Sentence:</b> ${clickedPoint.sentence || "—"}<br>
+      <b>Valence:</b> ${clickedPoint.x}<br>
+      <b>Arousal:</b> ${clickedPoint.y}<br>
+      <b>Timestamp:</b> ${clickedPoint.t}
+    </div>
+
+    <h3>Full Trajectory</h3>
+    ${trajectoryHTML}
+  `;
+}
+
+// ======================
+// FILTER
+// ======================
+document.getElementById("emotionFilter").addEventListener("change", e => {
+  activeEmotion = e.target.value;
+  drawBase();
+});
+
+// ======================
+// RESET
+// ======================
+document.getElementById("resetViewBtn").addEventListener("click", () => {
+  activeEmotion = "all";
+  document.getElementById("emotionFilter").value = "all";
+  document.getElementById("info").innerHTML = "";
+  selectedTraj = null;
+  drawBase();
+});
+
+loadData();
+
+</script>
+
+</body>
+</html>
