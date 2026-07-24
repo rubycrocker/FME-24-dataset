@@ -19,9 +19,92 @@
     <div id="content">
         <h1>FME-24 Dataset</h1>
         <p>Here are the available CSV files for the FME-24 dataset. You can download them by clicking the respective download buttons.</p>
-        <p>The first four CSVs (March 2026 Update) listed here at the top of the page are the most up to date CSVs used for regression analysis for V-A prediction and participants demographics and GoldMSI responses.</p>
-        <p>The fifth CSV (April 2026 Update) provides emotion categories derived from participants’ free-text emotion sentences. These are generated using semantic clustering and probabilistic labelling, offering a flexible, interpretable representation of emotional meaning beyond the standard Valence–Arousal dimensions.</p>
-        <p>The second CSVs (Sept 2025 Update) here are in a different format for categorical data based on emotion sentence semantic analysis, where there are before and after features extracted and composite features included, this is dated and advised not to used. </p>
+        <p>The July 2026 CSV provides the latest files developed for the Film Music Semantic Emotion 
+            Representation (FMSER) pipeline. This includes window-based acoustic fingerprints)
+        </p> 
+        <p>The March 2026 CSVs contain the main FME-24 regression features, including acoustic features, 
+            Valence-Arousal annotations, timestamps, participant demographics and GoldMSI responses.
+        </p>  
+        <p>Earlier CSV versions are retained for reproducibility but are no longer recommended for new 
+            analysis.
+        </p>
+
+                
+        <!-- Latest Update Section -->
+        <h2>JULY 2026 Update: CSVs for FMSER - semantic emotion representation and window-based feature extraction</h2>
+        <div class="download-section latest-july26-update">
+            <h2>audio_fingerprints.csv</h2>
+            <a href="2026-csvs/audio_fingerprints.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+        
+            <p class="download-description">
+                Audio fingerprint features extracted from the FME-24 film music excerpts. 
+                This CSV contains timestamped acoustic feature windows used for modelling 
+                relationships between musical characteristics and listener-derived emotion representations.
+            </p>
+        
+            <button class="toggle-btn" onclick="toggleMoreInfo('audio-fingerprints-info', this)">
+                More Details
+            </button>
+        
+            <div id="audio-fingerprints-info" style="display: none; margin-top: 1em;">
+                <p class="download-description">
+                    Each row represents a temporal audio window extracted from a film music excerpt. 
+                    The dataset includes low-level and high-level acoustic descriptors including MFCC 
+                    statistics, spectral features, RMS energy, zero-crossing rate, harmonic and 
+                    percussive energy ratios, pitch-related features, rhythm descriptors, onset density, 
+                    danceability, key, scale and tonal information.
+                </p>
+        
+                <p class="download-description">
+                    These features were extracted using fixed temporal windows and are designed for 
+                    machine learning experiments involving temporal prediction of semantic emotion 
+                    representations. The CSV provides the acoustic input features used for FMSER 
+                    prediction experiments.
+                </p>
+            </div>
+        </div>
+        <!-- Latest Update Section -->
+        <!-- Latest Update Section
+        <h2>JULY 2026 Update: FMSER Semantic Representation and Window-Based Acoustic Features</h2>
+        <div class="download-section latest-july26-update">
+            <h2>audio_fingerprints.csv</h2>
+            <a href="2026-csvs/audio_fingerprints.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+        
+            <p class="download-description">
+                Window-based acoustic features extracted from all film music excerpts used in the FMSER experiments. Each row corresponds to a 1-second analysis window (0.5-second hop size) and contains the acoustic descriptors used for semantic emotion prediction.
+            </p>
+        
+            <button class="toggle-btn" onclick="toggleMoreInfo('audio-fingerprints', this)">More Details</button>
+        
+            <div id="audio-fingerprints" style="display:none; margin-top:1em;">
+                <p class="download-description">
+                    This file contains the acoustic feature representation used to train the Temporal CNN described in the FMSER paper. Features include MFCC statistics, spectral descriptors, harmonic and percussive energy, RMS energy, onset density, zero-crossing rate, pitch statistics, key, danceability, spectral complexity, dissonance measures, and other timbral, rhythmic and tonal descriptors extracted from overlapping temporal windows. Each window is linked to its corresponding audio excerpt and timestamp, enabling frame-level modelling of semantic emotion trajectories.
+                </p>
+            </div>
+        </div>
+
+        <div class="download-section latest-july26-update">
+            <h2>emotion_vectors.csv</h2>
+            <a href="2026-csvs/emotion_vectors.csv" download class="download-btn">
+                <button>Download CSV</button>
+            </a>
+        
+            <p class="download-description">
+                FMSER semantic emotion representations for each annotated timestamp. Each row contains the continuous 12-dimensional semantic emotion vector derived from participants' free-text descriptions.
+            </p>
+        
+            <button class="toggle-btn" onclick="toggleMoreInfo('emotion-vectors', this)">More Details</button>
+        
+            <div id="emotion-vectors" style="display:none; margin-top:1em;">
+                <p class="download-description">
+                    This file contains the Film Music Semantic Emotion Representation (FMSER) introduced in the accompanying paper. Each annotation is represented as a probability-like semantic activation vector across twelve emotion regions (Calm, Excited, Fear, Nostalgic, Happy, Sad, Relief, Uncertain, Curious, Anticipation, Tense and Hopeful). The vectors are generated from participants' free-text emotion descriptions using sentence embeddings, semantic region discovery and cosine similarity to semantic centroids. These representations serve as the prediction targets for the acoustic modelling experiments and provide a continuous semantic alternative to traditional categorical or Valence–Arousal emotion labels.
+                </p>
+            </div>
+        </div> -->
 
 
         <!-- Latest Update Section -->
